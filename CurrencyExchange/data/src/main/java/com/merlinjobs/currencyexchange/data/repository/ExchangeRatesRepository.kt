@@ -22,8 +22,10 @@ class ExchangeRatesRepository : IExchangeRatesRepository {
 
     private var mDisposableBag = CompositeDisposable()
 
-    override fun getExchangeRates(base: String, symbols: String): Observable<APICurrencyResponse> {
-        return mConvertRoute.getCurrencyConversion(base, symbols)
+    override fun getExchangeRates(symbols: String): Observable<APICurrencyResponse> {
+        return mConvertRoute.getCurrencyConversion(symbols)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .doOnNext {
                     mCurrentExchangeRate = it.rates
                 }

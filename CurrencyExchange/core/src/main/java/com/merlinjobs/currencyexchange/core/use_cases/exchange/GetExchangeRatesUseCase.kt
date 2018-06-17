@@ -14,7 +14,6 @@ class GetExchangeRatesUseCase(mSubscribeOnScheduler: Scheduler,
     lateinit var mExchangeRatesRepository: IExchangeRatesRepository
 
     override fun buildUseCase(params: Pair<String, String>): Completable {
-        return Completable.fromObservable(mExchangeRatesRepository.getExchangeRates(params.first,
-                params.second))
+        return Completable.fromObservable(mExchangeRatesRepository.getExchangeRates(params.second))
     }
 }

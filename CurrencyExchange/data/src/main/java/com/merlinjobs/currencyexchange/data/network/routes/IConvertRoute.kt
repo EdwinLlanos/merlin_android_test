@@ -8,8 +8,7 @@ import retrofit2.http.Query
 
 interface IConvertRoute {
 
-    @GET("latest")
-    fun getCurrencyConversion(@Query("base") base: String,
-                              @Query("symbols") symbols: String): Observable<APICurrencyResponse>
+    @GET("latest?access_key=$FIXER_IO_ACCESS_KEY")
+    fun getCurrencyConversion(@Query("symbols") symbols: String): Observable<APICurrencyResponse>
 
 }
