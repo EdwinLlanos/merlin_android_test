@@ -37,7 +37,7 @@ class ExchangeActivity : AppCompatActivity(), IExchangeActivityView {
         mETValue?.filters = arrayOf(DecimalDigitsInputFilter(1))
         Single.create<Map<String, Currency>> { emitter ->
             val map = HashMap<String, Currency>()
-            BaseApplication.getInstance().getmCurrencies().forEach {
+            BaseApplication.instance!!.getmCurrencies()!!.forEach {
                 map[it.code] = it
             }
             emitter.onSuccess(map)

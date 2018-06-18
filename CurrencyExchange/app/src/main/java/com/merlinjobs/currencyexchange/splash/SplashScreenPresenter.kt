@@ -31,8 +31,7 @@ class SplashScreenPresenter : ISplashScreenPresenter {
     private val mDisposableBag = CompositeDisposable()
 
     init {
-        BaseApplication.getInstance()
-                .useCaseComponent.inject(this)
+        BaseApplication.instance!!.useCaseComponent.inject(this)
     }
 
 
@@ -42,7 +41,7 @@ class SplashScreenPresenter : ISplashScreenPresenter {
 
             val disposable = object : DisposableSingleObserver<List<Currency>>() {
                 override fun onSuccess(t: List<Currency>) {
-                    BaseApplication.getInstance().setmCurrencies(t)
+                    BaseApplication.instance!!.setmCurrencies(t)
                     createLocalStorage()
                     mDisposableBag.remove(this)
                 }

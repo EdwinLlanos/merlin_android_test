@@ -32,7 +32,7 @@ class PreferenceFragmentDialogPresenter : IPreferenceFragmentDialogPresenter {
     private val mDisposableBag = CompositeDisposable()
 
     init {
-        BaseApplication.getInstance()
+        BaseApplication.instance!!
                 .useCaseComponent.inject(this)
     }
 
@@ -87,8 +87,8 @@ class PreferenceFragmentDialogPresenter : IPreferenceFragmentDialogPresenter {
         mView?.showProgressBar()
         val disposable = object : DisposableSingleObserver<List<String>>() {
             override fun onSuccess(t: List<String>) {
-                mView?.showFavoritesCurrencies(BaseApplication.getInstance()
-                        .getmCurrencies(), ArrayList(t))
+                mView?.showFavoritesCurrencies(BaseApplication.instance!!
+                        .getmCurrencies()!!, ArrayList(t))
                 mDisposableBag.remove(this)
                 mView?.hideProgressBar()
             }

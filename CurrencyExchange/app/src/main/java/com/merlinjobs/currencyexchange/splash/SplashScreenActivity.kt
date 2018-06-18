@@ -1,5 +1,6 @@
 package com.merlinjobs.currencyexchange.splash
 
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.merlinjobs.currencyexchange.R
 import com.merlinjobs.currencyexchange.exchange.ExchangeActivity
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import java.util.*
+import javax.inject.Inject
 
 
 class SplashScreenActivity : AppCompatActivity(), ISplashScreenView {
@@ -20,6 +22,9 @@ class SplashScreenActivity : AppCompatActivity(), ISplashScreenView {
     private var mCreationTime: Long = 0
 
     private var mMinTime = 5000
+
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
