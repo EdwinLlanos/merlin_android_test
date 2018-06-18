@@ -7,7 +7,6 @@ import com.merlinjobs.currencyexchange.BaseApplication
 import com.merlinjobs.currencyexchange.core.use_cases.base.ICompletableUseCase
 import com.merlinjobs.currencyexchange.core.use_cases.base.ISingleUseCase
 import com.merlinjobs.currencyexchange.data.local.models.Currency
-import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
@@ -112,9 +111,9 @@ class SplashScreenPresenter : ISplashScreenPresenter {
             }
         }
         mDisposableBag.add(disposable)
-        mGetExchangeRateUseCase.execute(Pair("USD", Gson().toJson(currencies)), disposable)
-
-
+        mGetExchangeRateUseCase.execute(Pair("USD", currencies.toString()
+                .replace("[", "")
+                .replace("]", "")), disposable)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
