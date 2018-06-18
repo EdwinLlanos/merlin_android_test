@@ -6,7 +6,7 @@ import io.reactivex.subjects.Subject
 
 interface IExchangeRatesRepository {
 
-    fun getExchangeRates(base: String, symbols: String): Observable<APICurrencyResponse>
+    fun getExchangeRates(symbols: String): Observable<APICurrencyResponse>
 
     val mExchangePublisher: Subject<HashMap<String, Double>>
 

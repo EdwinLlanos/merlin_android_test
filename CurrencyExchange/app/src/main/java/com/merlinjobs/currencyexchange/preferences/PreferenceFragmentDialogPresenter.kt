@@ -2,12 +2,12 @@ package com.merlinjobs.currencyexchange.preferences
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.merlinjobs.currencyexchange.BaseApplication
 import com.merlinjobs.currencyexchange.core.use_cases.base.ICompletableUseCase
 import com.merlinjobs.currencyexchange.core.use_cases.base.ISingleUseCase
 import com.merlinjobs.currencyexchange.data.DEFAULT_FAVORITE_CURRENCIES
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
@@ -41,7 +41,7 @@ class PreferenceFragmentDialogPresenter : IPreferenceFragmentDialogPresenter {
         mView?.showProgressBar()
         val favoriteCurrencies = mView?.getFavoriteCurrencies()
         favoriteCurrencies?.let {
-            val disposable = object:DisposableCompletableObserver(){
+            val disposable = object : DisposableCompletableObserver() {
                 override fun onComplete() {
                     mView?.hideProgressBar()
                     refreshExchangeRatesUseCase(favoriteCurrencies)
@@ -59,7 +59,7 @@ class PreferenceFragmentDialogPresenter : IPreferenceFragmentDialogPresenter {
         }
     }
 
-    private fun refreshExchangeRatesUseCase(currencies:List<String>){
+    private fun refreshExchangeRatesUseCase(currencies: List<String>) {
         mView?.showProgressBar()
         val disposable = object : DisposableCompletableObserver() {
             override fun onComplete() {
@@ -77,7 +77,9 @@ class PreferenceFragmentDialogPresenter : IPreferenceFragmentDialogPresenter {
 
         }
         mDisposableBag.add(disposable)
-        mGetExchangeRateUseCase.execute(Pair("USD", Gson().toJson(currencies)), disposable)
+        mGetExchangeRateUseCase.execute(Pair("", currencies.toString()
+                .replace("[", "")
+                .replace("]", "")), disposable)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
