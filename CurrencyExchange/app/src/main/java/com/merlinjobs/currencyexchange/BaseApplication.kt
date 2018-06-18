@@ -1,13 +1,23 @@
 package com.merlinjobs.currencyexchange
 
+import android.app.Activity
 import android.app.Application
 
 import com.merlinjobs.currencyexchange.data.local.models.Currency
 import com.merlinjobs.currencyexchange.di.DaggerUseCaseComponent
 import com.merlinjobs.currencyexchange.di.UseCaseComponent
 import com.merlinjobs.currencyexchange.di.UseCaseModule
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-class BaseApplication : Application() {
+class BaseApplication : Application(), HasActivityInjector {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+
+    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
+
 
     private var mUseCaseComponent: UseCaseComponent? = null
 
