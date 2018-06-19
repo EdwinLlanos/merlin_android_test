@@ -7,6 +7,7 @@ import com.merlinjobs.currencyexchange.data.local.models.Currency
 import com.merlinjobs.currencyexchange.di.DaggerUseCaseComponent
 import com.merlinjobs.currencyexchange.di.UseCaseComponent
 import com.merlinjobs.currencyexchange.di.UseCaseModule
+import com.merlinjobs.currencyexchange.splash.mvvm.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -37,6 +38,11 @@ class BaseApplication : Application(), HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        DaggerAppComponent
+                .builder()
+                .appContext(this)
+                .create(this)
+                .inject(this)
     }
 
     fun getmCurrencies(): List<Currency>? {

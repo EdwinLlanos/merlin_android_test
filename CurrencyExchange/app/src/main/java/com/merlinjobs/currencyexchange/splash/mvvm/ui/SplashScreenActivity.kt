@@ -1,33 +1,30 @@
-package com.merlinjobs.currencyexchange.splash
+package com.merlinjobs.currencyexchange.splash.mvvm.ui
 
-import android.arch.lifecycle.ViewModelProvider
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import com.merlinjobs.currencyexchange.R
-import com.merlinjobs.currencyexchange.exchange.ExchangeActivity
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import java.util.*
-import javax.inject.Inject
 
 
-class SplashScreenActivity : AppCompatActivity(), ISplashScreenView {
-
-    private val mPresenter: ISplashScreenPresenter = SplashScreenPresenter()
+class SplashScreenActivity : AppCompatActivity() {
 
     private var mCreationTime: Long = 0
 
     private var mMinTime = 5000
 
+//    @Inject
+//    lateinit var vmFactory: ViewModelProvider.Factory
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        lifecycle.addObserver(mPresenter)
-        mPresenter.bind(this)
+
     }
 
     override fun onResume() {
@@ -51,24 +48,12 @@ class SplashScreenActivity : AppCompatActivity(), ISplashScreenView {
     }
 
 
-    override fun initComponents() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showProgressBar() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideProgressBar() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun navigateToNextActivity() {
-        mIVIcon?.postDelayed({
-            startActivity(Intent(this, ExchangeActivity::class.java))
-        }, getDelay())
-
-    }
+//    override fun navigateToNextActivity() {
+//        mIVIcon?.postDelayed({
+//            startActivity(Intent(this, ExchangeActivity::class.java))
+//        }, getDelay())
+//
+//    }
 
     private fun getDelay(): Long {
         var differece = Calendar.getInstance().timeInMillis - mMinTime
@@ -88,9 +73,4 @@ class SplashScreenActivity : AppCompatActivity(), ISplashScreenView {
         return if (elapsedSeconds > 0) mMinTime - elapsedSeconds else 0
 
     }
-
-    override fun getContext(): Context {
-        return this
-    }
-
 }
