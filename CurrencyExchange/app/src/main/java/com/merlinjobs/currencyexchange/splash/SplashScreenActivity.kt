@@ -1,6 +1,6 @@
 package com.merlinjobs.currencyexchange.splash
 
-import android.arch.lifecycle.ViewModelProvider
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import com.merlinjobs.currencyexchange.R
 import com.merlinjobs.currencyexchange.exchange.ExchangeActivity
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import java.util.*
-import javax.inject.Inject
 
 
 class SplashScreenActivity : AppCompatActivity(), ISplashScreenView {

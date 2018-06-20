@@ -7,4 +7,5 @@
     <string name="favorite_currencies_label">Select your favorite currencies</string>
     <string name="currency_settings_label">Currency Settings</string>
     <string name="sample_app_description">Merlin Jobs Android Devs Candidates Test</string>
+    <string name="default_error_message">Error al intentar conectar con el servidor</string>
 </resources>
