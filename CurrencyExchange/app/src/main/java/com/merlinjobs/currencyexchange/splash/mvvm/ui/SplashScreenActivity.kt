@@ -71,7 +71,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
 
-    fun navigateToNextActivity() {
+    private fun navigateToNextActivity() {
         mIVIcon?.postDelayed({
             startActivity(Intent(this, ExchangeActivity::class.java))
         }, getDelay())
