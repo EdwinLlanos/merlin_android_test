@@ -1,7 +1,6 @@
 package com.merlinjobs.currencyexchange.splash.mvvm.di
 
 import android.arch.lifecycle.ViewModelProvider
-import com.merlinjobs.currencyexchange.splash.mvvm.di.DaggerViewModelFactory
 import dagger.Binds
 import dagger.Module
 
