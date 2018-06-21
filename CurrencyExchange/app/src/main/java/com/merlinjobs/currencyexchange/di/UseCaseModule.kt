@@ -3,6 +3,7 @@ package com.merlinjobs.currencyexchange.di
 import android.content.Context
 import android.widget.EditText
 import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent
+import com.merlinjobs.currencyexchange.BaseApplication
 import com.merlinjobs.currencyexchange.core.use_cases.IUseCaseFactory
 import com.merlinjobs.currencyexchange.core.use_cases.UseCaseFactory
 import com.merlinjobs.currencyexchange.core.use_cases.base.ICompletableUseCase
@@ -28,6 +29,12 @@ class UseCaseModule {
     @Singleton
     fun provideCompositeDisposable(): CompositeDisposable {
         return CompositeDisposable()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext():Context{
+        return BaseApplication.instance!!.applicationContext
     }
 
     @Provides
