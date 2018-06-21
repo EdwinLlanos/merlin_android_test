@@ -2,6 +2,7 @@ package com.merlinjobs.currencyexchange.di
 
 import android.content.Context
 import android.widget.EditText
+import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent
 import com.merlinjobs.currencyexchange.core.use_cases.IUseCaseFactory
 import com.merlinjobs.currencyexchange.core.use_cases.UseCaseFactory
 import com.merlinjobs.currencyexchange.core.use_cases.base.ICompletableUseCase
@@ -9,9 +10,9 @@ import com.merlinjobs.currencyexchange.core.use_cases.base.IObservableUseCase
 import com.merlinjobs.currencyexchange.core.use_cases.base.ISingleUseCase
 import com.merlinjobs.currencyexchange.data.local.models.Currency
 import com.merlinjobs.currencyexchange.data.local.models.ExchangeConversion
-import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 @Module
@@ -21,6 +22,12 @@ class UseCaseModule {
     @Singleton
     fun provideUseCaseFactory(): IUseCaseFactory {
         return UseCaseFactory()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCompositeDisposable(): CompositeDisposable {
+        return CompositeDisposable()
     }
 
     @Provides

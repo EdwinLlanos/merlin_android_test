@@ -16,11 +16,12 @@ class SplashScreenViewModel
 @Inject constructor(private val mGetCurrenciesUseCase: ISingleUseCase<List<Currency>, Context>,
                     private val mGetExchangeRateUseCase: ICompletableUseCase<Pair<String, String>>,
                     private val mCreateLocalStorageUseCase: ICompletableUseCase<Context>,
-                    private val mGetFavoriteCurrenciesUseCase: ISingleUseCase<List<String>, Any?>)
+                    private val mGetFavoriteCurrenciesUseCase: ISingleUseCase<List<String>, Any?>,
+                    private val mDisposableBag:CompositeDisposable)
     : ViewModel() {
 
+    //private val mDisposableBag = CompositeDisposable()
     private val context: Context = BaseApplication.instance!!.applicationContext
-    private val mDisposableBag = CompositeDisposable()
     val stateLiveData = MutableLiveData<SplashState>()
 
 
