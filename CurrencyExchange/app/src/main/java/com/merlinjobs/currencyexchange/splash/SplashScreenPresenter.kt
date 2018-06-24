@@ -31,7 +31,7 @@ class SplashScreenPresenter : ISplashScreenPresenter {
     private val mDisposableBag = CompositeDisposable()
 
     init {
-        BaseApplication.instance!!.useCaseComponent.inject(this)
+        BaseApplication.instance!!.useCaseComponent!!.inject(this)
     }
 
 

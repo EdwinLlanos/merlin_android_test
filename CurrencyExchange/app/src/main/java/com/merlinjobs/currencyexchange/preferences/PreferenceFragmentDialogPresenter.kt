@@ -33,7 +33,7 @@ class PreferenceFragmentDialogPresenter : IPreferenceFragmentDialogPresenter {
 
     init {
         BaseApplication.instance!!
-                .useCaseComponent.inject(this)
+                .useCaseComponent!!.inject(this)
     }
 
 

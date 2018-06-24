@@ -2,16 +2,19 @@ package com.merlinjobs.currencyexchange
 
 import android.app.Activity
 import android.app.Application
+import android.support.annotation.VisibleForTesting
 import com.merlinjobs.currencyexchange.data.local.models.Currency
 import com.merlinjobs.currencyexchange.di.DaggerUseCaseComponent
 import com.merlinjobs.currencyexchange.di.UseCaseComponent
 import com.merlinjobs.currencyexchange.di.UseCaseModule
+import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
 
 class BaseApplication : Application(), HasActivityInjector {
+
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
@@ -22,7 +25,7 @@ class BaseApplication : Application(), HasActivityInjector {
     private var mCurrencies: List<Currency>? = null
 
 
-    val useCaseComponent: UseCaseComponent
+    var useCaseComponent: UseCaseComponent? = null
         get() {
             if (mUseCaseComponent == null) {
                 mUseCaseComponent = DaggerUseCaseComponent.builder()
@@ -35,7 +38,8 @@ class BaseApplication : Application(), HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        useCaseComponent.inject(this)
+        useCaseComponent!!.inject(this)
+        initializeLeakDetection()
     }
 
     fun getmCurrencies(): List<Currency>? {
@@ -49,5 +53,9 @@ class BaseApplication : Application(), HasActivityInjector {
     companion object {
         var instance: BaseApplication? = null
             private set
+    }
+
+    private fun initializeLeakDetection() {
+        if (BuildConfig.DEBUG) LeakCanary.install(this)
     }
 }

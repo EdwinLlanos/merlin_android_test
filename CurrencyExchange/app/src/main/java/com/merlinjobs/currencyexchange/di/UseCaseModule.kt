@@ -33,7 +33,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideApplicationContext():Context{
+    fun provideApplicationContext(): Context {
         return BaseApplication.instance!!.applicationContext
     }
 

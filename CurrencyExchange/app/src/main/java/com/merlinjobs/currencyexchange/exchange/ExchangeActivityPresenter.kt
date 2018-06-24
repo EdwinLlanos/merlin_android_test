@@ -40,7 +40,7 @@ class ExchangeActivityPresenter : IExchangeActivityPresenter {
 
     init {
         BaseApplication.instance!!
-                .useCaseComponent.inject(this)
+                .useCaseComponent!!.inject(this)
     }
 
 
