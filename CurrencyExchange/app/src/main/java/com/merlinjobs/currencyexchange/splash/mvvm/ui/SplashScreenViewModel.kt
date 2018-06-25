@@ -12,12 +12,12 @@ import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
-open class SplashScreenViewModel
+class SplashScreenViewModel
 @Inject constructor(private val mGetCurrenciesUseCase: ISingleUseCase<List<Currency>, Context>,
                     private val mGetExchangeRateUseCase: ICompletableUseCase<Pair<String, String>>,
                     private val mCreateLocalStorageUseCase: ICompletableUseCase<Context>,
                     private val mGetFavoriteCurrenciesUseCase: ISingleUseCase<List<String>, Any?>,
-                    private val mDisposableBag:CompositeDisposable,
+                    private val mDisposableBag: CompositeDisposable,
                     private val context: Context)
     : ViewModel() {
 
@@ -43,7 +43,7 @@ open class SplashScreenViewModel
 
     }
 
-     fun createLocalStorage() {
+    private fun createLocalStorage() {
         val disposable = object : DisposableCompletableObserver() {
             override fun onComplete() {
                 getFavoriteCurrencies()
