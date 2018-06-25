@@ -9,11 +9,10 @@ import com.merlinjobs.currencyexchange.core.use_cases.base.ISingleUseCase
 import com.merlinjobs.currencyexchange.data.local.models.Currency
 import com.merlinjobs.currencyexchange.splash.mvvm.ui.SplashScreenViewModel
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableCompletableObserver
+import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
 import org.mockito.Mockito.mock
 
 
@@ -25,7 +24,7 @@ class SplashScreenViewModelTest : AndroidTest() {
     val mGetFavoriteCurrenciesUseCase: ISingleUseCase<List<String>, Any?> = mock()
 
 
-    private var viewModel: SplashScreenViewModel? = null
+    var viewModel: SplashScreenViewModel = mock(SplashScreenViewModel::class.java)
     private var context = mock(MockContext::class.java)
 
     private var compositeDisposable: CompositeDisposable? = null
@@ -40,16 +39,11 @@ class SplashScreenViewModelTest : AndroidTest() {
 
     @Test
     fun `should loadData success`() {
-        Mockito.`when`(viewModel!!.loadData())
-                .then {
-                    mGetExchangeRateUseCase.execute(Pair("USD", ""), disposable)
-                }
-
 
     }
 
-    val disposable = object : DisposableCompletableObserver() {
-        override fun onComplete() {
+    var singleObserver = object : DisposableSingleObserver<List<Currency>>() {
+        override fun onSuccess(t: List<Currency>) {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 

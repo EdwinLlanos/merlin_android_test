@@ -12,7 +12,7 @@ import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
-class SplashScreenViewModel
+open class SplashScreenViewModel
 @Inject constructor(private val mGetCurrenciesUseCase: ISingleUseCase<List<Currency>, Context>,
                     private val mGetExchangeRateUseCase: ICompletableUseCase<Pair<String, String>>,
                     private val mCreateLocalStorageUseCase: ICompletableUseCase<Context>,
@@ -43,7 +43,7 @@ class SplashScreenViewModel
 
     }
 
-    private fun createLocalStorage() {
+     fun createLocalStorage() {
         val disposable = object : DisposableCompletableObserver() {
             override fun onComplete() {
                 getFavoriteCurrencies()
@@ -83,7 +83,6 @@ class SplashScreenViewModel
     private fun getExchangeRates(currencies: List<String>) {
         val disposable = object : DisposableCompletableObserver() {
             override fun onComplete() {
-                //  mView?.navigateToNextActivity()
                 stateLiveData.value = DoneState(true, null)
                 mDisposableBag.remove(this)
             }
